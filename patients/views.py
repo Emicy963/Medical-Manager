@@ -5,8 +5,8 @@ from django.contrib.messages import constants
 
 def patients(request):
     if request.method == 'GET':
-        conditions = Patients.conditions_choices
-        return render(request, 'patients.html', {'conditions': conditions})
+        patients = Patients.objects.all()
+        return render(request, 'patients.html', {'conditions': Patients.conditions_choices, 'patients': patients})
     elif request.method == 'POST':
         name = request.POST['name']
         email = request.POST['email']
