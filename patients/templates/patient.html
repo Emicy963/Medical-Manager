@@ -121,7 +121,7 @@
                       
                 </div>
             </div>
-
+            {{tuple_charts}}
             <div class="mt-4">
                 <canvas id="myChart"></canvas>
               </div>
@@ -131,5 +131,28 @@
     
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const ctx = document.getElementById('myChart');
+  
+    new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: {{tuple_charts.0|safe}},
+        datasets: [{
+          label: 'Humor do paciente',
+          data: {{tuple_charts.1|safe}},
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+</script>
 
 {% endblock 'body' %}

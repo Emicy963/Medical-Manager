@@ -36,7 +36,22 @@ def patient_view(request, id):
     if request.method == 'GET':
         todos = Todos.objects.all()
         consults = Consult.objects.filter(patient=patient)
-        return render(request, 'patient.html', {'patient': patient, 'todos': todos, 'consults': consults})
+
+        # Working in charts
+        #consults_list = list(str(c.date) for c in consults)
+        #for c in consults:
+        #    consults_list.append((str(c.date)))
+
+        #humor_list = list(h.humor for h in consults)
+        #for h in consults:
+        #   humor_list.append(h.humor)
+        
+        tuple_charts = (
+            [str(i.date) for i in consults],
+            [str(i.humor) for i in consults])
+        print(tuple_charts)
+
+        return render(request, 'patient.html', {'patient': patient, 'todos': todos, 'consults': consults, 'tuple_charts': tuple_charts})
     else:
         humor = request.POST.get('humor')
         geral_register = request.POST.get('geral_register')
