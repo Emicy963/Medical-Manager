@@ -12,7 +12,7 @@ class Patients(models.Model):
     email = models.EmailField()
     phone = models.CharField(max_length=255, null=True, blank=True)
     picture = models.ImageField(upload_to='pictures')
-    payments = models.BooleanField(default=True)
+    payments_status = models.BooleanField(default=True)
     conditions = models.CharField(max_length=4, choices=conditions_choices)
 
     def __str__(self):

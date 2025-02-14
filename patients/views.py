@@ -30,3 +30,16 @@ def patients(request):
         messages.add_message(request, constants.SUCCESS, 'Cadastro feito com sucesso!')
         return redirect('patients')
 
+def patient_view(request, id):
+    patient = Patients.objects.get(id=id)
+    if request.method == 'GET':
+        return render(request, 'patient.html', {'patient': patient})
+
+def upgrade_patient(request, id):
+    payments_status = request.POST.get('payments_status')
+    patient = Patients.objects.get(id=id)
+    status = True if payments_status == 'ativo' else False
+    patient.payments_status = status
+    patient.save()
+
+    return redirect(f'/patients/{id}')
